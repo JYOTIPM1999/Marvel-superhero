@@ -3,6 +3,8 @@ let private_api = "ab30ca613935ea396aa2a92d9d04db05211f5432";
 // var MD5 = require("crypto-js/md5");
 import MD5 from "crypto-js/md5";
 // alert(MD5);
+var md5 = CryptoJS.MD5;
+console.log(md5);
 
 // let search = async () => {
 //   let query = document.getElementById("query").value;

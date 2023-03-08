@@ -5,27 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <!-- <script src="/node_modules/crypto-js/crypto-js.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="/node_modules/crypto-js/crypto-js.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script> -->
   </head>
   <body>
     <input type="text" id="query" />
-    <button onclick="search()">Search</button>
+    <button id="search">Search</button>
     <div id="results"></div>
   </body>
 </html>
-<!-- <script type="module" src="index.mjs"></script> -->
+<!-- <script type="module" src="index.js"></script> -->
 <script type="module">
   let public_api = "df2548987c893122ae5f6233ce06cc76";
   let private_api = "ab30ca613935ea396aa2a92d9d04db05211f5432";
-  //   var MD5 = require("crypto-js/md5");
-  //   import MD5 from "crypto-js/md5";
-  //   console.log(MD5);
+
   var md5 = CryptoJS.MD5;
 
-  let search = async () => {
+  let search = document
+    .getElementById("search")
+    .addEventListener("click", function () {
+      sea();
+    });
+  var ts = new Date().getTime();
+  var hashed = md5(ts + public_api + private_api).toString();
+
+  let sea = async () => {
     let query = document.getElementById("query").value;
-    let url = `http://gateway.marvel.com/v1/public/characters=${query}&ts=1&apikey=2e1cdeec426ae323484f29024084c206&hash=d516513ba95b9407c7aca0f73b241f8a`;
+
+    let url = `http://gateway.marvel.com/v1/public/characters?&ts=${ts}&apikey=${public_api})&hash=${hashed}`;
+
     let res = await fetch(url);
     let data = await res.json();
     console.log(data);
