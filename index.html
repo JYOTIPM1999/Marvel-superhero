@@ -87,16 +87,10 @@
       fav.innerText = "Favourite";
 
       fav.addEventListener("click", function () {
-        // addtoFav(el);
-        // if (Favourite.length === 0) {
-        //   Favourite.push(el);
-        // } else
         if (Favourite.length > 0) {
           for (let i = 0; i < Favourite.length; i++) {
-            // console.log(Favourite[i].id);
-            // console.log("elll", el.id);
             if (el.id === Favourite[i].id) {
-              alert("already added to fav list");
+              return alert("already added to fav list");
             }
           }
         }
@@ -109,8 +103,4 @@
       results.append(box);
     });
   }
-
-  // function addtoFav(data) {
-  //   localStorage.setItem("fav", JSON.stringify(data));
-  // }
 </script>

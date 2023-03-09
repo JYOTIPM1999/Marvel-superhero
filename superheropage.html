@@ -12,7 +12,7 @@
     </style>
   </head>
   <body>
-    <h1>SuperHeros</h1>
+    <h1>Deatils of SuperHero</h1>
     <div id="results"></div>
   </body>
 </html>
@@ -22,23 +22,23 @@
   let results = document.getElementById("results");
 
   let id = document.createElement("h4");
-  id.innerText = details.id;
+  id.innerText = `ID - ${details.id}`;
 
   let name = document.createElement("h4");
-  name.innerText = details.name;
+  name.innerText = `Name- ${details.name}`;
 
   let description = document.createElement("h5");
-  description.innerText = details.description;
+  description.innerText = `Description - ${details.description}`;
 
   let image = document.createElement("img");
   image.src = details.thumbnail.path + "." + details.thumbnail.extension;
   image.style.width = "200px";
 
   let events = document.createElement("h4");
-  events.innerText = details.events.available;
+  events.innerText = `Events - ${details.events.available}`;
 
   let stories = document.createElement("h4");
-  stories.innerText = details.stories.available;
+  stories.innerText = `Stories - ${details.stories.available}`;
 
   results.append(id, name, description, image, events, stories);
 </script>
