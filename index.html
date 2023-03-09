@@ -7,7 +7,15 @@
     <title>Document</title>
     <script src="/node_modules/crypto-js/crypto-js.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script> -->
+    <style>
+      #results {
+        border: 2px solid red;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+    </style>
   </head>
+
   <body>
     <input type="text" id="query" />
     <button id="search">Search</button>
@@ -18,7 +26,8 @@
 <script type="module">
   let public_api = "df2548987c893122ae5f6233ce06cc76";
   let private_api = "ab30ca613935ea396aa2a92d9d04db05211f5432";
-
+  let Favourite = [];
+  let results = document.getElementById("results");
   var md5 = CryptoJS.MD5;
 
   let search = document
@@ -26,16 +35,66 @@
     .addEventListener("click", function () {
       sea();
     });
-  var ts = new Date().getTime();
-  var hashed = md5(ts + public_api + private_api).toString();
+
+  // var ts = new Date().getTime();
+  var ts = "1640717903956";
+  // console.log(ts);
+
+  // var hashed = md5(ts + public_api + private_api).toString();
+  var hashed = "79f2927f4d78496679d921b2473e0dbf";
+  // console.log(hashed);
 
   let sea = async () => {
     let query = document.getElementById("query").value;
-
-    let url = `http://gateway.marvel.com/v1/public/characters?&ts=${ts}&apikey=${public_api})&hash=${hashed}`;
-
-    let res = await fetch(url);
+    let res = await fetch(
+      `https://gateway.marvel.com/v1/public/characters?nameStartsWith=${query}&ts=1640717903935&apikey=fbaa46b0c09a2703c7e247764cda66f6&hash=cd07a618bf10905245ca5217773722a2`
+    );
     let data = await res.json();
-    console.log(data);
+
+    localStorage.setItem("heros", JSON.stringify(data.data.results));
+    append(data.data.results);
   };
+
+  function append(data) {
+    results.innerHTML = null;
+
+    data.map((el, i) => {
+      let box = document.createElement("div");
+      box.style.display = "block";
+
+      let name = document.createElement("h3");
+      name.innerHTML = el.name;
+
+      let image = document.createElement("img");
+      image.style.width = "100px";
+      image.src = el.thumbnail.path + "." + el.thumbnail.extension;
+
+      let fav = document.createElement("button");
+      fav.innerText = "Favourite";
+
+      fav.addEventListener("click", function () {
+        // addtoFav(el);
+        // if (Favourite.length === 0) {
+        Favourite.push(el);
+        // } else if (Favourite.length > 0) {
+        //   for (let i = 0; i < Favourite.length; i++) {
+        //     if (el.id === Favourite[i].id) {
+        //       alert("already added to fav list");
+        //     } else {
+        //       Favourite.push(el);
+        //     }
+        //   }
+        // }
+        localStorage.setItem("fav", JSON.stringify(Favourite));
+      });
+
+      box.append(name, image, fav);
+
+      results.append(box);
+    });
+  }
+
+  // function addtoFav(data) {
+  //   localStorage.setItem("fav", JSON.stringify(data));
+  // }
 </script>
