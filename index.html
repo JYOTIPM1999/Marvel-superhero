@@ -17,6 +17,7 @@
   </head>
 
   <body>
+    <button><a href="favourite.html">Fav</a></button>
     <input type="text" id="query" />
     <button id="search">Search</button>
     <div id="results"></div>
@@ -62,12 +63,22 @@
       let box = document.createElement("div");
       box.style.display = "block";
 
+      // box.addEventListener("click", function () {
+      //   localStorage.setItem("details", JSON.stringify(el));
+      //   window.location.assign("superheropage.html");
+      // });
+
       let name = document.createElement("h3");
       name.innerHTML = el.name;
 
       let image = document.createElement("img");
       image.style.width = "100px";
       image.src = el.thumbnail.path + "." + el.thumbnail.extension;
+
+      // image.addEventListener("click", function () {
+      //   localStorage.setItem("details", JSON.stringify(el));
+      //   window.location.assign("superheropage.html");
+      // });
 
       let fav = document.createElement("button");
       fav.innerText = "Favourite";

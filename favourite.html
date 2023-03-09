@@ -6,5 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <div id="results"></div>
+  </body>
 </html>
+<script>
+  let Favourite = JSON.parse(localStorage.getItem("fav")) || [];
+  console.log(Favourite);
+
+  let results = document.getElementById("results");
+
+  append();
+  function append() {
+    // results.innerHTML = null;
+
+    Favourite.map((el, i) => {
+      let box = document.createElement("div");
+      box.style.display = "block";
+
+      let name = document.createElement("h3");
+      name.innerHTML = el.name;
+
+      let image = document.createElement("img");
+      image.style.width = "100px";
+      image.src = el.thumbnail.path + "." + el.thumbnail.extension;
+
+      let deletes = document.createElement("button");
+      deletes.innerText = "Delete";
+
+      deletes.addEventListener("click", function () {
+        deleteFav(el.id);
+      });
+
+      box.append(name, image, deletes);
+      results.append(box);
+    });
+  }
+
+  function deleteFav(id) {
+    let updated = Favourite.filter((el, i) => {
+      return id !== el.id;
+    });
+    append();
+  }
+</script>

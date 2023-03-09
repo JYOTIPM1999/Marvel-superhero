@@ -4,7 +4,41 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Superhero</title>
+    <style>
+      #results {
+        display: inline-block;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <h1>SuperHeros</h1>
+    <div id="results"></div>
+  </body>
 </html>
+<script>
+  let details = JSON.parse(localStorage.getItem("details"));
+
+  let results = document.getElementById("results");
+
+  let id = document.createElement("h4");
+  id.innerText = details.id;
+
+  let name = document.createElement("h4");
+  name.innerText = details.name;
+
+  let description = document.createElement("h5");
+  description.innerText = details.description;
+
+  let image = document.createElement("img");
+  image.src = details.thumbnail.path + "." + details.thumbnail.extension;
+  image.style.width = "200px";
+
+  let events = document.createElement("h4");
+  events.innerText = details.events.available;
+
+  let stories = document.createElement("h4");
+  stories.innerText = details.stories.available;
+
+  results.append(id, name, description, image, events, stories);
+</script>
