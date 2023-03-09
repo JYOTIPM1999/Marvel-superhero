@@ -30,7 +30,7 @@
   let Favourite = JSON.parse(localStorage.getItem("fav")) || [];
   let Heros = JSON.parse(localStorage.getItem("heros")) || [];
   let results = document.getElementById("results");
-  var md5 = CryptoJS.MD5;
+  // var md5 = CryptoJS.MD5;
 
   let search = document
     .getElementById("search")
@@ -89,16 +89,18 @@
       fav.addEventListener("click", function () {
         // addtoFav(el);
         // if (Favourite.length === 0) {
+        //   Favourite.push(el);
+        // } else
+        if (Favourite.length > 0) {
+          for (let i = 0; i < Favourite.length; i++) {
+            // console.log(Favourite[i].id);
+            // console.log("elll", el.id);
+            if (el.id === Favourite[i].id) {
+              alert("already added to fav list");
+            }
+          }
+        }
         Favourite.push(el);
-        // } else if (Favourite.length > 0) {
-        //   for (let i = 0; i < Favourite.length; i++) {
-        //     if (el.id === Favourite[i].id) {
-        //       alert("already added to fav list");
-        //     } else {
-        //       Favourite.push(el);
-        //     }
-        //   }
-        // }
         localStorage.setItem("fav", JSON.stringify(Favourite));
       });
 
