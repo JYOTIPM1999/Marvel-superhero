@@ -16,9 +16,9 @@
 
   let results = document.getElementById("results");
 
-  append();
-  function append() {
-    // results.innerHTML = null;
+  append(Favourite);
+  function append(Favourite) {
+    results.innerHTML = null;
 
     Favourite.map((el, i) => {
       let box = document.createElement("div");
@@ -44,9 +44,14 @@
   }
 
   function deleteFav(id) {
+    console.log(id);
+
     let updated = Favourite.filter((el, i) => {
       return id !== el.id;
     });
-    append();
+
+    Favourite = updated;
+    localStorage.setItem("fav", JSON.stringify(updated));
+    append(updated);
   }
 </script>

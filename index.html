@@ -27,7 +27,8 @@
 <script type="module">
   let public_api = "df2548987c893122ae5f6233ce06cc76";
   let private_api = "ab30ca613935ea396aa2a92d9d04db05211f5432";
-  let Favourite = [];
+  let Favourite = JSON.parse(localStorage.getItem("fav")) || [];
+  let Heros = JSON.parse(localStorage.getItem("heros")) || [];
   let results = document.getElementById("results");
   var md5 = CryptoJS.MD5;
 
@@ -56,6 +57,8 @@
     append(data.data.results);
   };
 
+  append(Heros);
+
   function append(data) {
     results.innerHTML = null;
 
@@ -75,10 +78,10 @@
       image.style.width = "100px";
       image.src = el.thumbnail.path + "." + el.thumbnail.extension;
 
-      // image.addEventListener("click", function () {
-      //   localStorage.setItem("details", JSON.stringify(el));
-      //   window.location.assign("superheropage.html");
-      // });
+      image.addEventListener("click", function () {
+        localStorage.setItem("details", JSON.stringify(el));
+        window.location.assign("superheropage.html");
+      });
 
       let fav = document.createElement("button");
       fav.innerText = "Favourite";
